@@ -1,0 +1,53 @@
+const controllers = require("../controllers");
+
+module.exports = function (app) {
+  app.get(
+    "/api/admin/getall/user",
+    [
+      controllers.verifyJwtToken.verifyToken,
+      controllers.verifyJwtToken.isAdmin,
+    ],
+    controllers.users.getAllUsers
+  );
+  app.put(
+    "/api/admin/update/user/:id",
+    [
+      controllers.verifyJwtToken.verifyToken,
+      controllers.verifyJwtToken.isAdmin,
+    ],
+    controllers.users.updateUser
+  );
+  app.delete(
+    "/api/admin/delete/user/:id",
+    [
+      controllers.verifyJwtToken.verifyToken,
+      controllers.verifyJwtToken.isAdmin,
+    ],
+    controllers.users.deleteUser
+  );
+
+  app.get(
+    "/api/admin/transaction/:id",
+    [
+      controllers.verifyJwtToken.verifyToken,
+      controllers.verifyJwtToken.isAdmin,
+    ],
+    controllers.transaction.getTransactionByAdmin
+  );
+  app.get(
+    "/api/admin/transaction",
+    [
+      controllers.verifyJwtToken.verifyToken,
+      controllers.verifyJwtToken.isAdmin,
+    ],
+    controllers.transaction.getAllTransactions
+  );
+  app.delete(
+    "/api/admin/transaction/:id",
+    [
+      controllers.verifyJwtToken.verifyToken,
+      controllers.verifyJwtToken.isAdmin,
+    ],
+    controllers.transaction.deleteTransactionByAdmin
+  );
+};
